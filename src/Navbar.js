@@ -10,28 +10,32 @@ function Navbar(props) {
             <a href='/'>reactcolorpicker</a>
 
         </div>
-        <div className='slider'>
-            <Slider
-                defaultValue={level}
-                min={100}
-                max={900}
-                step={100}
-                onAfterChange={changeLevel}
-                trackStyle={[{ backgroundColor: "transparent" }]}
-                handleStyle={[
-                    {
-                        backgroundColor: "green",
-                        outline: "none",
-                        border: "2px solid green",
-                        boxShadow: "none",
-                        width: "13px",
-                        height: "13px",
-                        marginLeft: "-7px",
-                        marginTop: "-3px",
-                    },
-                ]}
-                railStyle={{ height: "8" }} />
+        <div className='slider-container'>
+            <span>Level: {level}</span>
+            <div className='slider'>
+                <Slider
+                    defaultValue={level}
+                    min={100}
+                    max={900}
+                    step={100}
+                    onAfterChange={changeLevel}
+                    trackStyle={[{ backgroundColor: "transparent" }]}
+                    handleStyle={[
+                        {
+                            backgroundColor: "green",
+                            outline: "none",
+                            border: "2px solid green",
+                            boxShadow: "none",
+                            width: "13px",
+                            height: "13px",
+                            marginLeft: "-7px",
+                            marginTop: "-3px",
+                        },
+                    ]}
+                    railStyle={{ height: "8" }} />
+            </div>
         </div>
+
     </header>;
 }
 
