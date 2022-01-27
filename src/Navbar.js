@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './Navbar.css';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 function Navbar(props) {
-    const { level, changeLevel } = props;
+    const { level, changeLevel, handleChange, format } = props;
     return <header className='Navbar'>
         <div className='logo'>
             <a href='/'>reactcolorpicker</a>
@@ -34,6 +36,15 @@ function Navbar(props) {
                     ]}
                     railStyle={{ height: "8" }} />
             </div>
+        </div>
+        <div>
+            <Select
+                value={format} onChange={handleChange}>
+                <MenuItem value="hex">HEX - #ffffff</MenuItem>
+                <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
+                <MenuItem value="rgba">RGBA - rgba(255,255,255,1.0</MenuItem>
+                <MenuItem value="cmyk">CMYK</MenuItem>
+            </Select>
         </div>
 
     </header>;
