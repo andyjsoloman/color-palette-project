@@ -4,9 +4,13 @@ import 'rc-slider/assets/index.css';
 import './Navbar.css';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import SnackbarContent from '@mui/material/SnackbarContent';
 
 function Navbar(props) {
-    const { level, changeLevel, handleChange, format } = props;
+    const { level, changeLevel, handleChange, format, snackbar, snackToggle } = props;
     return <header className='Navbar'>
         <div className='logo'>
             <a href='/'>reactcolorpicker</a>
@@ -37,8 +41,9 @@ function Navbar(props) {
                     railStyle={{ height: "8" }} />
             </div>
         </div>
-        <div>
+        <div className='select-container'>
             <Select
+
                 value={format} onChange={handleChange}>
                 <MenuItem value="hex">HEX - #ffffff</MenuItem>
                 <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
@@ -46,6 +51,19 @@ function Navbar(props) {
                 <MenuItem value="cmyk">CMYK</MenuItem>
             </Select>
         </div>
+        <Snackbar
+            open={snackbar}
+            autoHideDuration={3000}
+            onClose={snackToggle}
+            message={<span id='message-id'>Format Changed!</span>}
+            ContentProps={{ role: 'alert' }}
+            action={[
+                <IconButton onClick={snackToggle} color='inherit' key='close' aria-label='close'>
+                    <CloseIcon />
+                </IconButton>
+            ]}
+
+        />
 
     </header>;
 }
