@@ -9,7 +9,7 @@ function ColorBox(props) {
     const copyClick = () => setCopied(true);
 
     useEffect(() => {
-        setTimeout(() => { setCopied(false) }, 1500);
+        setTimeout(() => { setCopied(false) }, 2000);
     });
 
     return <CopyToClipboard text={props.background} onCopy={copyClick}>

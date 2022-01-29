@@ -5,10 +5,11 @@ import './Palette.css';
 
 
 function Palette(props) {
+    const { palette } = props;
     const [level, setLevel] = useState(500);
     const [format, setFormat] = useState('hex');
     const [snackbar, setSnackbar] = useState(false);
-    const colorBoxes = props.palette.colors[level].map(color => (<ColorBox background={color[format]} name={color.name} />));
+    const colorBoxes = props.palette.colors[level].map(color => (<ColorBox background={color[format]} name={color.name} key={color.id} />));
     const changeLevel = newLevel => {
         setLevel(newLevel);
     };
@@ -28,7 +29,11 @@ function Palette(props) {
             snackbar={snackbar}
             snackToggle={snackToggle} />
         <div className='Palette-colors'>{colorBoxes}</div>
-        {/* footer eventually */}
+        <footer className='Palette-footer'>
+            {palette.paletteName}
+
+            <span className='emoji'>{palette.emoji}</span>
+        </footer>
     </div>;
 }
 
