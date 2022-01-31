@@ -7,13 +7,14 @@ import Select from '@mui/material/Select';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from 'react-router-dom';
 import SnackbarContent from '@mui/material/SnackbarContent';
 
 function Navbar(props) {
     const { level, changeLevel, handleChange, format, snackbar, snackToggle } = props;
     return <header className='Navbar'>
         <div className='logo'>
-            <a href='/'>reactcolorpicker</a>
+            <Link to="/">reactcolorpicker</Link>
 
         </div>
         <div className='slider-container'>
