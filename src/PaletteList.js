@@ -5,14 +5,17 @@ import seedColors from './SeedColors';
 import styled from 'styled-components';
 
 const RootDiv = styled.div`
-background-color: palevioletred;
-height: 100%;
+background-color: #324e2a;
+height: 100vh;
 display: flex;
 align-items: flex-start;
+
+
 justify-content: center;`;
 
 const ContainerDiv = styled.div`
 width: 50%;
+
 display: flex;
 align-items: flex-start;
 flex-direction: column;
@@ -29,6 +32,7 @@ color:white;
 const PalettesDiv = styled.div`
 box-sizing: border-box;
 width:100%;
+
 display: grid;
 grid-template-columns: repeat(3,30%);
 grid-gap: 5%;
