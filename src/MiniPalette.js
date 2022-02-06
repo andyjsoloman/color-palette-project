@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const StyledDiv = styled.div`
 color:#324e2a;`;
@@ -51,12 +52,14 @@ font-size:1rem;
 `;
 
 function MiniPalette(props) {
+    const navigate = useNavigate();
+    const newClick = () => { navigate(`/palette/${props.id}`) }
 
     const miniColorBoxes = props.colors.map(color => (
         <MiniColor style={{ backgroundColor: color.color }} key={color.name}></MiniColor>
     ))
     return <StyledDiv>
-        <RootDiv>
+        <RootDiv onClick={newClick}>
             <ColorsDiv>
                 {miniColorBoxes}
             </ColorsDiv>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
 import seedColors from './SeedColors';
 import styled from 'styled-components';
@@ -39,6 +39,7 @@ grid-gap: 5%;
 `;
 
 function PaletteList() {
+
 
     return <RootDiv>
         <ContainerDiv>
