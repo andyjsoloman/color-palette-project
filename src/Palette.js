@@ -21,7 +21,7 @@ function Palette() {
     const [level, setLevel] = useState(500);
     const [format, setFormat] = useState('hex');
     const [snackbar, setSnackbar] = useState(false);
-    const colorBoxes = palette.colors[level].map(color => (<ColorBox background={color[format]} name={color.name} key={color.id} />));
+    const colorBoxes = palette.colors[level].map(color => (<ColorBox background={color[format]} name={color.name} key={color.id} id={color.id} paletteId={palette.id} showLink={true} />));
     const changeLevel = newLevel => {
         setLevel(newLevel);
     };
@@ -46,6 +46,7 @@ function Palette() {
 
             <span className='emoji'>{palette.emoji}</span>
         </footer>
+
     </div>;
 }
 

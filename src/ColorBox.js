@@ -27,9 +27,10 @@ function ColorBox(props) {
                 </div>
                 <button className='copy-button'>Copy</button>
             </div>
-            <Link to='/' onClick={e => e.stopPropagation()}>
-                <span className='see-more'>More</span>
-            </Link>
+            {props.showLink && (
+                <Link to={`/palette/${props.paletteId}/${props.id}`} onClick={e => e.stopPropagation()}>
+                    <span className='see-more'>More</span>
+                </Link>)}
         </div>
     </CopyToClipboard>;
 }
