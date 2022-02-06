@@ -9,6 +9,7 @@ function App() {
     <Routes>
       <Route path="/" element={<PaletteList />} />
       <Route path="/palette/:paletteId" element={<Palette />} />
+      <Route path="/palette/:paletteId/:colorId" element={<h1>HEY HEEEEEEEYYYY</h1>} />
     </Routes>
   );
 }
