@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import seedColors from "./SeedColors";
 import ColorBox from './ColorBox';
+import Navbar from './Navbar';
+import PaletteFooter from './PaletteFooter'
 import { generatePalette } from './colorHelpers';
 
 function SingleColorPalette() {
     const { colorId, paletteId } = useParams();
-
+    const [format, setFormat] = useState('hex');
+    const [snackbar, setSnackbar] = useState(false);
     const findPalette = (id) => {
         return seedColors.find(function (palette) {
             return palette.id === id;
@@ -26,14 +29,31 @@ function SingleColorPalette() {
         }
         return shadesArr.slice(1);
     }
-    console.log(shades);
-    console.log(palette);
-    const colorBoxes = shades.map(color => (<ColorBox key={color.name} name={color.name} background={color.hex} showLink={false} />));
+
+    const changeFormat = e => {
+        setFormat(e.target.value);
+        setSnackbar(true);
+    };
+    const snackToggle = () => {
+        setSnackbar(!snackbar);
+    }
+
+    const colorBoxes = shades.map(color => (<ColorBox key={color.name} name={color.name} background={color[format]} showLink={false} />));
 
     return <div className='Palette'>
-        <h1>SINGELCOLORRRRPALETTE {colorId}</h1>
+        <Navbar
+            handleChange={changeFormat}
+            format={format}
+            snackbar={snackbar}
+            snackToggle={snackToggle}
+            showSlider={false}
+        />
+
         <div className='Palette-colors'>{colorBoxes}</div>
-        <h2>{paletteId}</h2>
+        <PaletteFooter
+            paletteName={palette.paletteName}
+            emoji={palette.emoji}
+        />
 
     </div>;
 }

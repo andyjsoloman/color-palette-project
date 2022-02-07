@@ -11,37 +11,39 @@ import { Link } from 'react-router-dom';
 import SnackbarContent from '@mui/material/SnackbarContent';
 
 function Navbar(props) {
-    const { level, changeLevel, handleChange, format, snackbar, snackToggle } = props;
+    const { level, changeLevel, handleChange, format, snackbar, snackToggle, showSlider } = props;
     return <header className='Navbar'>
         <div className='logo'>
             <Link to="/">reactcolorpicker</Link>
 
         </div>
-        <div className='slider-container'>
-            <span>Level: {level}</span>
-            <div className='slider'>
-                <Slider
-                    defaultValue={level}
-                    min={100}
-                    max={900}
-                    step={100}
-                    onAfterChange={changeLevel}
-                    trackStyle={[{ backgroundColor: "transparent" }]}
-                    handleStyle={[
-                        {
-                            backgroundColor: "green",
-                            outline: "none",
-                            border: "2px solid green",
-                            boxShadow: "none",
-                            width: "13px",
-                            height: "13px",
-                            marginLeft: "-7px",
-                            marginTop: "-3px",
-                        },
-                    ]}
-                    railStyle={{ height: "8" }} />
+        {showSlider && (
+            <div className='slider-container'>
+                <span>Level: {level}</span>
+                <div className='slider'>
+                    <Slider
+                        defaultValue={level}
+                        min={100}
+                        max={900}
+                        step={100}
+                        onAfterChange={changeLevel}
+                        trackStyle={[{ backgroundColor: "transparent" }]}
+                        handleStyle={[
+                            {
+                                backgroundColor: "green",
+                                outline: "none",
+                                border: "2px solid green",
+                                boxShadow: "none",
+                                width: "13px",
+                                height: "13px",
+                                marginLeft: "-7px",
+                                marginTop: "-3px",
+                            },
+                        ]}
+                        railStyle={{ height: "8" }} />
+                </div>
             </div>
-        </div>
+        )}
         <div className='select-container'>
             <Select
 
