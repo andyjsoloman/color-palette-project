@@ -60,6 +60,12 @@
     font-size: 12px;
 }
 
+.white-color{
+    color: white;
+}
+
+
+
 .see-more{
     background: rgba(255,255,255,0.3);
     position:absolute;
@@ -73,6 +79,7 @@
     line-height: 30px;
     text-transform:uppercase;
 }
+
 
 .copy-overlay{
     opacity:0;
@@ -127,4 +134,8 @@
 .copied-msg p {
     font-size:2rem;
     font-weight: 100;
+}
+
+.black-color{
+    color: rgba(0,0,0,0.5); 
 }
