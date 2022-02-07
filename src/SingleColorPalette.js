@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import seedColors from "./SeedColors";
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
@@ -40,7 +40,7 @@ function SingleColorPalette() {
 
     const colorBoxes = shades.map(color => (<ColorBox key={color.name} name={color.name} background={color[format]} showLink={false} />));
 
-    return <div className='Palette'>
+    return <div className='SingleColorPalette Palette'>
         <Navbar
             handleChange={changeFormat}
             format={format}
@@ -49,7 +49,12 @@ function SingleColorPalette() {
             showSlider={false}
         />
 
-        <div className='Palette-colors'>{colorBoxes}</div>
+        <div className='Palette-colors'>{colorBoxes}
+            <div className='go-back ColorBox'>
+                <Link to={`/palette/${palette.id}`} className='back-button'>GO BACK</Link>
+            </div></div>
+
+
         <PaletteFooter
             paletteName={palette.paletteName}
             emoji={palette.emoji}
