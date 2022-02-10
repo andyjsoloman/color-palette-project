@@ -17,7 +17,7 @@
     position:relative;
 }
 
-.copy-button, .back-button{
+.back-button{
     width:100px;
     height:30px;
     position:absolute;
@@ -39,14 +39,14 @@
 
 }
 
-.copy-button{
+/* .copy-button{
     opacity:0;
-}
+} */
 
-.ColorBox:hover .copy-button{
+/* .ColorBox:hover .copy-button{
     opacity:1;
     transition:0.5s;
-}
+} */
 
 .box-content{
     position:absolute;
@@ -60,13 +60,13 @@
     font-size: 12px;
 }
 
-.white-color{
+/* .white-color{
     color: white;
-}
+} */
 
 
 
-.see-more{
+/* .see-more{
     background: rgba(255,255,255,0.3);
     position:absolute;
     border:none;
@@ -78,7 +78,7 @@
     text-align: center;
     line-height: 30px;
     text-transform:uppercase;
-}
+} */
 
 
 .copy-overlay{
@@ -135,7 +135,7 @@
     font-size:2rem;
     font-weight: 100;
 }
-
+/* 
 .black-color{
     color: rgba(0,0,0,0.5); 
-}
+} */

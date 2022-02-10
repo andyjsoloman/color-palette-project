@@ -38,7 +38,7 @@ function SingleColorPalette() {
         setSnackbar(!snackbar);
     }
 
-    const colorBoxes = shades.map(color => (<ColorBox key={color.name} name={color.name} background={color[format]} showLink={false} />));
+    const colorBoxes = shades.map(color => (<ColorBox key={color.name} name={color.name} background={color[format]} showingFullPalette={false} />));
 
     return <div className='SingleColorPalette Palette'>
         <Navbar

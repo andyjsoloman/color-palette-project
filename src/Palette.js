@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import chroma from "chroma-js";
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter';
@@ -19,10 +20,11 @@ function Palette() {
     };
     const palette = generatePalette(findPalette(paletteId));
 
+
     const [level, setLevel] = useState(500);
     const [format, setFormat] = useState('hex');
     const [snackbar, setSnackbar] = useState(false);
-    const colorBoxes = palette.colors[level].map(color => (<ColorBox background={color[format]} name={color.name} key={color.id} id={color.id} paletteId={palette.id} showLink={true} />));
+    const colorBoxes = palette.colors[level].map(color => (<ColorBox background={color[format]} name={color.name} key={color.id} id={color.id} paletteId={palette.id} showingFullPalette />));
     const changeLevel = newLevel => {
         setLevel(newLevel);
     };
