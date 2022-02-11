@@ -13,13 +13,15 @@ display: inline-block;
 position: relative;
 cursor: pointer;
 margin-bottom: -3.5px;
-`
+`;
 
 const StyledP = styled.p`
-color: ${props => props.contrastBoolean ? "white" : "rgba(0,0,0,0.5)"};`
+color: ${props => props.contrastBoolean ? "white" : "rgba(0,0,0,0.5)"};
+font-size:2rem;
+font-weight: 100;`;
 
 const NameSpan = styled.span`
-color: ${props => props.contrastBoolean ? "white" : "rgba(0,0,0,0.5)"};`
+color: ${props => props.contrastBoolean ? "white" : "rgba(0,0,0,0.5)"};`;
 
 const CopyButton = styled.button`
 color: ${props => props.contrastBoolean ? "white" : "rgba(0,0,0,0.5)"};
@@ -44,7 +46,7 @@ border:none;
   ${CBoxDiv}:hover & {
     opacity:1;
     transition:0.5s;
-  }`
+  }`;
 
 const MoreSpan = styled.span`
 color: ${props => props.contrastBoolean ? "white" : "rgba(0,0,0,0.5)"};
@@ -57,7 +59,66 @@ background: rgba(255,255,255,0.3);
     height: 30px;
     text-align: center;
     line-height: 30px;
-    text-transform:uppercase;`
+    text-transform:uppercase;`;
+
+const BoxContent = styled.div`
+    position:absolute;
+    width:100%;
+    left:0px;
+    bottom:0px;
+    padding: 10px;
+    color: black;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    `;
+
+const CopyOverlay = styled.div`
+    opacity:1;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    transition:transform 0.6s ease-in-out;
+    transform: scale(0.1);
+    &.show{
+        opacity:1;
+        transform:scale(50);
+        z-index: 10;
+        position:absolute;
+    }`;
+
+const CopyMsg = styled.div`
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 4rem;
+    transform: scale(0.1);
+    opacity:0;
+    color:white;
+    &.show{
+        opacity:1;
+        transform: scale(1);
+        z-index:25;
+        transition: all 0.4s ease-in-out;
+        transition-delay: 0.3s;
+    }
+    & h1 {
+        font-weight: 400;
+        text-shadow: 1px 2px black;
+        background: rgba(255,255,255,0.2);
+        width:100%;
+        text-align: center;
+        margin-bottom: 0;
+        padding:1rem; 
+        text-transform:uppercase;
+    }`
+
 
 
 function ColorBox(props) {
@@ -76,17 +137,17 @@ function ColorBox(props) {
 
     return <CopyToClipboard text={props.background} onCopy={copyClick}>
         <CBoxDiv checkFullPalette={props.showingFullPalette} style={{ background: props.background }} >
-            <div style={{ background: props.background }}
-                className={`copy-overlay ${copied ? "show" : "false"}`} />
-            <div className={`copied-msg ${copied ? "show" : "false"}`}>
+            <CopyOverlay style={{ background: props.background }} className={`${copied ? "show" : "false"}`}
+            />
+            <CopyMsg className={`${copied ? "show" : "false"}`}>
                 <h1>copied!</h1>
                 <StyledP contrastBoolean={contrast}>{props.background}</StyledP>
-            </div>
-            <div className='copy-container'>
-                <div className='box-content'>
+            </CopyMsg>
+            <div>
+                <BoxContent>
                     <NameSpan contrastBoolean={contrast}>{props.name}</NameSpan>
-                </div>
-                <CopyButton contrastBoolean={contrast} className='copy-button'>Copy</CopyButton>
+                </BoxContent>
+                <CopyButton contrastBoolean={contrast} >Copy</CopyButton>
             </div>
             {props.showingFullPalette && (
                 <Link to={`/palette/${props.paletteId}/${props.id}`} onClick={e => e.stopPropagation()}>
