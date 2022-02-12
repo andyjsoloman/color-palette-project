@@ -7,6 +7,15 @@ import PaletteFooter from './PaletteFooter';
 import './Palette.css';
 import seedColors from "./SeedColors";
 import { generatePalette } from './colorHelpers';
+import styled from 'styled-components';
+
+const StyledPalette = styled.div`
+height: 100vh;
+display: flex;
+flex-direction: column;`;
+
+const PaletteColors = styled.div`
+height:90%;`;
 
 
 
@@ -36,7 +45,7 @@ function Palette() {
     const snackToggle = () => {
         setSnackbar(!snackbar);
     }
-    return <div className='Palette'>
+    return <StyledPalette >
         <Navbar level={level}
             changeLevel={changeLevel}
             handleChange={changeFormat}
@@ -44,12 +53,12 @@ function Palette() {
             snackbar={snackbar}
             snackToggle={snackToggle}
             showSlider={true} />
-        <div className='Palette-colors'>{colorBoxes}</div>
+        <PaletteColors >{colorBoxes}</PaletteColors>
         <PaletteFooter
             paletteName={palette.paletteName}
             emoji={palette.emoji}
         />
-    </div>;
+    </StyledPalette>;
 }
 
 export default Palette;

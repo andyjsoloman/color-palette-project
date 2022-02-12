@@ -5,6 +5,46 @@ import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter'
 import { generatePalette } from './colorHelpers';
+import styled from 'styled-components';
+
+const StyledSCPalette = styled.div`
+
+height: 100vh;
+display: flex;
+flex-direction: column;`
+
+const PaletteColors = styled.div` 
+height:90%;`
+
+const BackBox = styled.div`
+width: 20%;
+height: 50%;
+margin: 0 auto;
+display: inline-block;
+position: relative;
+cursor: pointer;
+margin-bottom: -3.5px;
+background-color: black;`
+
+const StyledLink = styled(Link)`
+width:100px;
+    height:30px;
+    position:absolute;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top:-15px;
+    text-align: center;
+    outline: none;
+    background: rgba(255,255,255,0.3);
+    font-size:1rem;
+    line-height:30px;
+    color:white;
+    text-transform: uppercase;
+    border:none;
+      cursor:pointer;
+      text-decoration: none;`
 
 function SingleColorPalette() {
     const { colorId, paletteId } = useParams();
@@ -40,7 +80,7 @@ function SingleColorPalette() {
 
     const colorBoxes = shades.map(color => (<ColorBox key={color.name} name={color.name} background={color[format]} showingFullPalette={false} />));
 
-    return <div className='SingleColorPalette Palette'>
+    return <StyledSCPalette>
         <Navbar
             handleChange={changeFormat}
             format={format}
@@ -49,10 +89,10 @@ function SingleColorPalette() {
             showSlider={false}
         />
 
-        <div className='Palette-colors'>{colorBoxes}
-            <div className='go-back ColorBox'>
-                <Link to={`/palette/${palette.id}`} className='back-button'>GO BACK</Link>
-            </div></div>
+        <PaletteColors>{colorBoxes}
+            <BackBox>
+                <StyledLink to={`/palette/${palette.id}`} >GO BACK</StyledLink>
+            </BackBox></PaletteColors>
 
 
         <PaletteFooter
@@ -60,7 +100,7 @@ function SingleColorPalette() {
             emoji={palette.emoji}
         />
 
-    </div>;
+    </StyledSCPalette>;
 }
 
 export default SingleColorPalette;
