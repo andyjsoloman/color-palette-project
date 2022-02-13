@@ -4,19 +4,9 @@ import chroma from "chroma-js";
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter';
-import './Palette.css';
 import seedColors from "./SeedColors";
 import { generatePalette } from './colorHelpers';
-import styled from 'styled-components';
-
-const StyledPalette = styled.div`
-height: 100vh;
-display: flex;
-flex-direction: column;`;
-
-const PaletteColors = styled.div`
-height:90%;`;
-
+import { StyledPalette, PaletteColors } from './styles/PaletteStyles';
 
 
 

@@ -1,18 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const StyledPFooter = styled.footer`
-background-color: white;
-height: 5vh;
-display: flex;
-justify-content: flex-end;
-align-items: center;
-font-weight: bold;
-`
-
-const FooterEmoji = styled.span`
-font-size: 1.5rem;
-margin: 0 1rem;`
+import { StyledPFooter, FooterEmoji } from './styles/PaletteFooterStyles';
 
 function PaletteFooter(props) {
     return <div>
