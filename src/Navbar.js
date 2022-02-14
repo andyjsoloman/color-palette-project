@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
-import SnackbarContent from '@mui/material/SnackbarContent';
+// import SnackbarContent from '@mui/material/SnackbarContent';
+import { StyledNav, StyledLogo, NavLink, SliderDiv, SelecterDiv } from './styles/NavbarStyles'
+
+
 
 function Navbar(props) {
     const { level, changeLevel, handleChange, format, snackbar, snackToggle, showSlider } = props;
-    return <header className='Navbar'>
-        <div className='logo'>
-            <Link to="/">reactcolorpicker</Link>
+    return <StyledNav>
+        <StyledLogo>
+            <NavLink to="/">reactcolorpicker</NavLink>
 
-        </div>
+        </StyledLogo>
         {showSlider && (
             <div className='slider-container'>
                 <span>Level: {level}</span>
-                <div className='slider'>
+                <SliderDiv>
                     <Slider
                         defaultValue={level}
                         min={100}
@@ -41,10 +42,10 @@ function Navbar(props) {
                             },
                         ]}
                         railStyle={{ height: "8" }} />
-                </div>
+                </SliderDiv>
             </div>
         )}
-        <div className='select-container'>
+        <SelecterDiv>
             <Select
 
                 value={format} onChange={handleChange}>
@@ -53,7 +54,7 @@ function Navbar(props) {
                 <MenuItem value="rgba">RGBA - rgba(255,255,255,1.0</MenuItem>
                 <MenuItem value="cmyk">CMYK</MenuItem>
             </Select>
-        </div>
+        </SelecterDiv>
         <Snackbar
             open={snackbar}
             autoHideDuration={3000}
@@ -68,7 +69,7 @@ function Navbar(props) {
 
         />
 
-    </header>;
+    </StyledNav>;
 }
 
 export default Navbar;
