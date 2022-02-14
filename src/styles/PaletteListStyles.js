@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const RootDiv = styled.div`
 background-color: #324e2a;
@@ -23,7 +24,13 @@ display: flex;
 width: 100%;
 justify-content: space-between;
 color:white;
+align-items:center;
+text-decoration:none;
 `;
+
+export const CreateLink = styled(Link)`
+color:white;
+text-decoration:none`
 
 export const PalettesDiv = styled.div`
 box-sizing: border-box;
