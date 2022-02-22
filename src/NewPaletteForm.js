@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -7,15 +7,19 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { ChromePicker } from 'react-color';
+import DraggableColorBox from './DraggableColorBox';
 
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
+        height: 'calc(100vh - 64px)',
         flexGrow: 1,
         padding: theme.spacing(3),
         transition: theme.transitions.create('margin', {
@@ -62,6 +66,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function NewPaletteForm() {
     const [open, setOpen] = React.useState(false);
 
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -69,6 +74,18 @@ export default function NewPaletteForm() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const [colors, setColors] = React.useState(['purple', '#e15764'])
+
+    const [color, setColor] = useState('teal');
+
+    const changeColor = (newColor) => {
+        setColor(newColor.hex)
+    };
+
+    function addNewColor() {
+        setColors(oldColors => [...oldColors, color])
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -107,11 +124,22 @@ export default function NewPaletteForm() {
                         <ChevronLeftIcon />
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
 
+                <Divider />
+                <Typography variant='h4'>Design Your Palette</Typography>
+                <div>
+                    <Button variant='contained' color='secondary'>Clear Palette</Button>
+                    <Button variant='contained' color='primary'>Random Color</Button>
+                </div>
+                <ChromePicker color={color} onChange={(newColor) => changeColor(newColor)} disableAlpha={true} />
+                <Button variant='contained' color='primary' style={{ backgroundColor: color }} onClick={addNewColor}>Add Color</Button>
             </Drawer>
-            <Main open={open}>
+            <Main open={open} >
                 <DrawerHeader />
+
+                {colors.map(color => (
+                    <DraggableColorBox color={color} />
+                ))}
 
             </Main>
         </Box>
