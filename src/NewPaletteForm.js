@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -13,6 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import DraggableColorBox from './DraggableColorBox';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 
 const drawerWidth = 400;
@@ -64,6 +65,23 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function NewPaletteForm() {
+
+    useEffect(() => {
+        ValidatorForm.addValidationRule("isColorNameUnique", value => {
+            return colors.every(
+                ({ name }) => name.toLowerCase() !== value.toLowerCase()
+            );
+        });
+    });
+    useEffect(() => {
+        ValidatorForm.addValidationRule("isColorUnique", value => {
+            return colors.every(
+                ({ color }) => color !== currentColor
+            );
+        });
+    });
+
+
     const [open, setOpen] = React.useState(false);
 
 
@@ -75,16 +93,27 @@ export default function NewPaletteForm() {
         setOpen(false);
     };
 
-    const [colors, setColors] = React.useState(['purple', '#e15764'])
+    const [colors, setColors] = React.useState([])
 
-    const [color, setColor] = useState('teal');
+    const [currentColor, setColor] = useState();
+
+    const [newName, setName] = useState('');
 
     const changeColor = (newColor) => {
         setColor(newColor.hex)
     };
 
     function addNewColor() {
-        setColors(oldColors => [...oldColors, color])
+        const newColor = {
+            color: currentColor,
+            name: newName
+        }
+        setColors(oldColors => [...oldColors, newColor]);
+        setName('')
+    };
+
+    function handleChange(evt) {
+        setName(evt.target.value);
     }
 
     return (
@@ -131,14 +160,19 @@ export default function NewPaletteForm() {
                     <Button variant='contained' color='secondary'>Clear Palette</Button>
                     <Button variant='contained' color='primary'>Random Color</Button>
                 </div>
-                <ChromePicker color={color} onChange={(newColor) => changeColor(newColor)} disableAlpha={true} />
-                <Button variant='contained' color='primary' style={{ backgroundColor: color }} onClick={addNewColor}>Add Color</Button>
+                <ChromePicker color={currentColor} onChange={(newColor) => changeColor(newColor)} disableAlpha={true} />
+                <ValidatorForm onSubmit={addNewColor}>
+                    <TextValidator value={newName} onChange={handleChange} validators={['required', 'isColorNameUnique', 'isColorUnique']}
+                        errorMessages={['This field is required', 'This name is already taken', 'This color is already present']} />
+                    <Button variant='contained' color='primary' style={{ backgroundColor: currentColor }} type='submit'>Add Color</Button>
+                </ValidatorForm>
+
             </Drawer>
             <Main open={open} >
                 <DrawerHeader />
 
                 {colors.map(color => (
-                    <DraggableColorBox color={color} />
+                    <DraggableColorBox color={color.color} name={color.name} />
                 ))}
 
             </Main>
