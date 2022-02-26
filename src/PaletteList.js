@@ -1,9 +1,12 @@
 import React from 'react';
 import MiniPalette from './MiniPalette';
-import seedColors from './SeedColors';
 import { RootDiv, ContainerDiv, StyledNav, PalettesDiv, CreateLink } from './styles/PaletteListStyles';
 
-function PaletteList() {
+function PaletteList(props) {
+
+
+
+
 
 
     return <RootDiv>
@@ -15,7 +18,7 @@ function PaletteList() {
                 </CreateLink>
             </StyledNav>
             <PalettesDiv>
-                {seedColors.map(palette => (
+                {props.palettes.map(palette => (
                     <MiniPalette {...palette} />))}
             </PalettesDiv>
         </ContainerDiv>

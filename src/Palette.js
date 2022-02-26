@@ -10,10 +10,10 @@ import { StyledPalette, PaletteColors } from './styles/PaletteStyles';
 
 
 
-function Palette() {
+function Palette(props) {
     const { paletteId } = useParams();
     const findPalette = (id) => {
-        return seedColors.find(function (palette) {
+        return props.palettes.find(function (palette) {
             return palette.id === id;
         });
     };
