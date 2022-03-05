@@ -26,7 +26,7 @@ function App() {
       <Route path="/" element={<PaletteList palettes={palettes} />} />
       <Route path="/palette/:paletteId" element={<Palette palettes={palettes} />} />
       <Route path="/palette/:paletteId/:colorId" element={<SingleColorPalette />} />
-      <Route path="/palette/new" element={<NewPaletteForm savePalette={savePalette} />} />
+      <Route path="/palette/new" element={<NewPaletteForm savePalette={savePalette} palettes={palettes} />} />
 
     </Routes>
   );

@@ -15,6 +15,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import DraggableColorBox from './DraggableColorBox';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import NewPaletteName from './NewPaletteName';
 
 
 const drawerWidth = 400;
@@ -66,7 +67,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function NewPaletteForm(props) {
-
+    const { palettes } = props;
     useEffect(() => {
         ValidatorForm.addValidationRule("isColorNameUnique", value => {
             return colors.every(
@@ -98,7 +99,7 @@ export default function NewPaletteForm(props) {
 
     const [currentColor, setColor] = useState();
 
-    const [newName, setName] = useState('');
+    const [newColorName, setName] = useState('');
 
     const changeColor = (newColor) => {
         setColor(newColor.hex)
@@ -107,7 +108,7 @@ export default function NewPaletteForm(props) {
     function addNewColor() {
         const newColor = {
             color: currentColor,
-            name: newName
+            name: newColorName
         }
         setColors(oldColors => [...oldColors, newColor]);
         setName('')
@@ -117,11 +118,11 @@ export default function NewPaletteForm(props) {
         setName(evt.target.value);
     }
 
-    function handleSubmit() {
-        let newName = 'YO THIS PALETTE HAS NO NAME'
+    function handleSubmit(newPaletteName) {
+
         const newPalette = {
-            paletteName: newName,
-            id: newName.toLowerCase().replace(/ /g, '-'),
+            paletteName: newPaletteName,
+            id: newColorName.toLowerCase().replace(/ /g, '-'),
             colors: colors
         }
         props.savePalette(newPalette);
@@ -146,13 +147,8 @@ export default function NewPaletteForm(props) {
                     <Typography variant="h6" noWrap component="div">
                         Persistent drawer
                     </Typography>
-                    <Button
-                        component={Link}
-                        to='/'
-                        onClick={handleSubmit}
-                        variant='contained'
-                        color='primary'
-                    >Save Palette</Button>
+                    <NewPaletteName handleSubmit={handleSubmit} palettes={palettes} />
+
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -182,7 +178,7 @@ export default function NewPaletteForm(props) {
                 </div>
                 <ChromePicker color={currentColor} onChange={(newColor) => changeColor(newColor)} disableAlpha={true} />
                 <ValidatorForm onSubmit={addNewColor}>
-                    <TextValidator value={newName} onChange={handleChange} validators={['required', 'isColorNameUnique', 'isColorUnique']}
+                    <TextValidator label='Color Name' name='newcolorName' value={newColorName} onChange={handleChange} validators={['required', 'isColorNameUnique', 'isColorUnique']}
                         errorMessages={['This field is required', 'This name is already taken', 'This color is already present']} />
                     <Button variant='contained' color='primary' style={{ backgroundColor: currentColor }} type='submit'>Add Color</Button>
                 </ValidatorForm>
